@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class InventoryItem : MonoBehaviour
+[System.Serializable]
+public class InventoryItem 
 {
-    // Start is called before the first frame update
-    void Start()
+    // Este script es para mostrar numero de objetos en el inventario y evitar que se muestren de uno por uno
+    public InventoryItemModel itemModel;
+    public int stackSize;
+
+    public InventoryItem(InventoryItemModel itemModel)
     {
-        
+        this.itemModel = itemModel;
+        AddStack();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddStack()
     {
-        
+        stackSize++;
+    }
+
+    public void RemoveFromStack()
+    {
+        stackSize--;
     }
 }
