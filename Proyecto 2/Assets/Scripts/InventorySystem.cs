@@ -13,10 +13,23 @@ public class InventorySystem : MonoBehaviour
     //Crea una nueva lista con el nuevo item
     private void Awake()
     {
-        inventory = new List<InventoryItem>();
         _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
 
         Instance = this;
+    }
+
+    void Start()
+    {
+        var json = PlayerPrefs.GetString("Inventory");
+        if (string.IsNullOrEmpty(json)) //Verifica si es nulo o un string vacío
+        {
+            inventory = new List<InventoryItem>(); //Es nulo
+        }
+        else //Es un string vacío
+        {
+            inventory = JsonConvert.DeserializeObject<List<InventoryItem>>(json);
+            Debug.Log(json);
+        }
     }
 
     private void Update()
@@ -24,6 +37,7 @@ public class InventorySystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             var json = JsonConvert.SerializeObject(inventory);
+            PlayerPrefs.SetString("Inventory",json);
             Debug.Log(json);
         }
     }
@@ -43,6 +57,8 @@ public class InventorySystem : MonoBehaviour
             inventory.Add(newItem);
             _itemDictionary.Add(itemData, newItem);
         }
+
+        Save();
     }
 
     //Función que remueve el objeto y la lista si es que llega a 0
@@ -58,5 +74,12 @@ public class InventorySystem : MonoBehaviour
                 _itemDictionary.Remove(itemData);
             }
         }
+    }
+
+    void Save()
+    {
+        var json = JsonConvert.SerializeObject(inventory);
+        PlayerPrefs.SetString("Inventory", json);
+        Debug.Log(json);
     }
 }
