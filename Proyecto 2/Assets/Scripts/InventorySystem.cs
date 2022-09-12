@@ -41,7 +41,6 @@ public class InventorySystem : MonoBehaviour
             Debug.Log("Agregar un nuevo item.");
             InventoryItem newItem = new InventoryItem(itemData.model);
             inventory.Add(newItem);
-            inventory.Add(newItem);
             _itemDictionary.Add(itemData, newItem);
         }
     }
