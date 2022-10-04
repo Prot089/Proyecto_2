@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Fisicas
+        //Physics
         playerRB.MovePosition(playerRB.position + moveInput * speed * Time.fixedDeltaTime);
     }
 }
