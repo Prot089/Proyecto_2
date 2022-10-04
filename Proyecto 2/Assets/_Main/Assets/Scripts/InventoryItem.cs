@@ -1,7 +1,7 @@
 [System.Serializable]
 public class InventoryItem 
 {
-    // Este script es para mostrar numero de objetos en el inventario y evitar que se muestren de uno por uno
+    // This script is for showing the number of objects in the inventory and to avoid showing them one by one
     public InventoryItemModel itemModel;
     public int stackSize;
 
