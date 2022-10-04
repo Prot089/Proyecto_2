@@ -23,7 +23,7 @@ public class EnemyFollowPlayer : MonoBehaviour
         }
     }
 
-    void onDragGizmosSelected()
+    void OnDragGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, lineOfSite);

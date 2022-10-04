@@ -9,19 +9,17 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRB;
     private Vector2 moveInput;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Inputs
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-        moveInput = new Vector2(moveX, moveY).normalized; //Velocidad normal, evita efecto hipotenusa.
+        moveInput = new Vector2(moveX, moveY).normalized; //Normal velocity, avoids hipotenuse effect.
     }
 
     private void FixedUpdate()

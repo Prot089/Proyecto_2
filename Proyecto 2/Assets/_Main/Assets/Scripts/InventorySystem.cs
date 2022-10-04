@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 
 public class InventorySystem : MonoBehaviour
 {
-    public static InventorySystem Instance;
+    public static InventorySystem Instance { get; private set; }
 
     private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
     public List<InventoryItem> inventory;
 
-    //Crea una nueva lista con el nuevo item
+    //Creates a new list
     private void Awake()
     {
         _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
@@ -21,11 +21,11 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         var json = PlayerPrefs.GetString("Inventory");
-        if (string.IsNullOrEmpty(json)) //Verifica si es nulo o un string vacío
+        if (string.IsNullOrEmpty(json)) //Verifies if its null or an empty string
         {
-            inventory = new List<InventoryItem>(); //Es nulo
+            inventory = new List<InventoryItem>(); //Its null
         }
-        else //Es un string vacío
+        else //Empty string
         {
             inventory = JsonConvert.DeserializeObject<List<InventoryItem>>(json);
             Debug.Log(json);
@@ -42,7 +42,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    //Evita que cada que tomes un nuevo item crees una nueva lista, por lo que permite acumularlos
+    //Avoids creating a new list every time you pick an item up so you can accumulate them
     public void Add(InventoryItemData itemData)
     {
         if(_itemDictionary.TryGetValue(itemData, out InventoryItem value))
@@ -61,7 +61,7 @@ public class InventorySystem : MonoBehaviour
         Save();
     }
 
-    //Función que remueve el objeto y la lista si es que llega a 0
+    //Function that removes the object from the list and the list if reaches 0
     public void Remove(InventoryItemData itemData)
     {
         if(_itemDictionary.TryGetValue(itemData, out InventoryItem value))
